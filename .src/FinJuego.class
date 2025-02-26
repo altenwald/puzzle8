@@ -1,0 +1,14 @@
+' Gambas class file
+
+Public Sub Run() As Boolean
+  Return Not Me.ShowModal()
+End
+
+Public Sub btnRestart_Click()
+  FMain.Shuffle
+  Me.Close
+End
+
+Public Sub btnExit_Click()
+  Quit
+End

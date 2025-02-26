@@ -1,0 +1,123 @@
+' Gambas class file
+
+' En un tablero de 3x3 tendremos un máximo de 3 celdas por línea
+' y un total de 9 celdas y 8 piezas.
+
+Private Max_cells_per_line As Integer = 3
+Private Max_pieces As Integer = Max_cells_per_line * Max_cells_per_line - 1
+Private Cell_height As Integer = 64
+Private Cell_width As Integer = 80
+Private margin_x As Integer = 8
+Private margin_y As Integer = 16
+Private margin_between_cells As Integer = 8
+Private cell_space_x As Integer = Cell_width + margin_between_cells
+Private cell_space_y As Integer = Cell_height + margin_between_cells
+
+Private board As Integer[]
+Private empty_cell As Integer[] = [0, 0]
+
+Private Function get_x(i As Integer) As Integer
+  Return margin_x + (i Mod Max_cells_per_line) * cell_space_x
+End
+
+Private Function get_y(i As Integer) As Integer
+  Return margin_y + (i \ Max_cells_per_line) * cell_space_y
+End
+
+Private Procedure store_empty_cell(num As Integer)
+  empty_cell[0] = get_x(num)
+  empty_cell[1] = get_y(num)
+End
+
+Public Sub Form_Open()
+  Shuffle
+End 
+
+Public Sub Shuffle()  
+  Dim i As Integer
+  Dim lbl As Label
+  Dim name As String
+
+  board = New Integer[Max_pieces + 1]
+  For i = 0 To Max_pieces
+    board[i] = i
+  Next
+
+  ' Baraja el tablero
+  For i = 1 To 100
+    make_random_move
+  Next
+
+  store_empty_cell(board[Max_pieces])
+
+  For i = 1 To Max_pieces
+    name = "Cell" & i
+    lbl = Me[name]
+    lbl.X = get_x(board[i - 1])
+    lbl.Y = get_y(board[i - 1])
+  Next
+End
+
+Private Sub make_random_move()
+  Dim moves As Integer[] = [-1, 1, -Max_cells_per_line, Max_cells_per_line]
+  Dim new_move As Integer
+  Dim new_pos As Integer
+  Dim empty_index As Integer = board[Max_pieces]
+  Dim empty_index_x As Integer
+  Dim empty_index_y As Integer
+  Dim min_limit As Integer = 0
+  Dim max_limit As Integer = Max_cells_per_line - 1
+
+  Do
+    new_move = moves[Int(Rnd(0, 1) * moves.Max)]
+    new_pos = empty_index + new_move
+    empty_index_x = empty_index Mod Max_cells_per_line
+    empty_index_y = empty_index \ Max_cells_per_line
+  Loop Until new_pos >= 0 And new_pos <= Max_pieces And
+             ((new_move = -1 And empty_index_x > min_limit) Or
+              (new_move = 1 And empty_index_x < max_limit) Or
+              (new_move = -Max_cells_per_line And empty_index_y > min_limit) Or
+              (new_move = Max_cells_per_line And empty_index_y < max_limit))
+
+  Swap board[Max_pieces], board[new_pos]
+End
+
+Public Sub Cells_MouseDown()
+  Dim lbl As Label
+  Dim x As Integer
+  Dim y As Integer
+  Dim lblIndex As Integer
+
+  ' Identificar la etiqueta presionada
+  lbl = Last
+  lblIndex = Val(Mid$(lbl.Name, 5, 2)) - 1
+
+  If (Abs(empty_cell[0] - lbl.X) = cell_space_x And empty_cell[1] = lbl.Y) Or
+     (Abs(empty_cell[1] - lbl.Y) = cell_space_y And empty_cell[0] = lbl.X) Then
+    ' Mover la etiqueta al hueco
+    x = lbl.X
+    y = lbl.Y
+
+    lbl.X = empty_cell[0]
+    lbl.Y = empty_cell[1]
+
+    empty_cell[0] = x
+    empty_cell[1] = y
+
+    ' Actualizar el tablero
+    Swap board[lblIndex], board[Max_pieces]
+
+    check
+  Endif
+End
+
+Private Procedure check()
+  Dim i As Integer
+  For i = 1 To Max_pieces
+    If board[i - 1] <> i - 1 Then
+      Return
+    Endif
+  Next
+
+  FinJuego.Run
+End

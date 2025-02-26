@@ -1,0 +1,21 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,34,14)
+  Resizable = False
+  Spacing = True
+  Margin = True
+  { Label1 Label
+    MoveScaled(2.5,2.625,29,4)
+    Text = ("¡Ganaste! ¿Quieres volver a jugar?")
+  }
+  { btnRestart Button
+    MoveScaled(14,9,9,4)
+    Text = ("Sí")
+    Default = True
+  }
+  { btnExit Button
+    MoveScaled(24,9,9,4)
+    Text = ("No")
+  }
+}

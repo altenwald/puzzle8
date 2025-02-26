@@ -1,0 +1,9 @@
+# Gambas Project File 3.0
+Title=Puzzle 8
+Startup=FMain
+Version=0.0.3
+Component=gb.image
+Component=gb.gtk3
+Component=gb.form
+TabSize=2
+Packager=1

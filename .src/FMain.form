@@ -1,0 +1,77 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,34,30)
+  { Cell1 Label Cells
+    Name = "Cell1"
+    MoveScaled(1,2,10,8)
+    Mouse = Cursor.Pointing
+    Alignment = Align.Center
+    Border = Border.Plain
+    BorderRadius = 11
+    Text = ("1")
+  }
+  { Cell2 Label Cells
+    Name = "Cell2"
+    MoveScaled(12,2,10,8)
+    Mouse = Cursor.Pointing
+    Alignment = Align.Center
+    Border = Border.Plain
+    BorderRadius = 11
+    Text = ("2")
+  }
+  { Cell3 Label Cells
+    Name = "Cell3"
+    MoveScaled(23,2,10,8)
+    Mouse = Cursor.Pointing
+    Alignment = Align.Center
+    Border = Border.Plain
+    BorderRadius = 11
+    Text = ("3")
+  }
+  { Cell4 Label Cells
+    Name = "Cell4"
+    MoveScaled(1,11,10,8)
+    Mouse = Cursor.Pointing
+    Alignment = Align.Center
+    Border = Border.Plain
+    BorderRadius = 11
+    Text = ("4")
+  }
+  { Cell5 Label Cells
+    Name = "Cell5"
+    MoveScaled(12,11,10,8)
+    Mouse = Cursor.Pointing
+    Alignment = Align.Center
+    Border = Border.Plain
+    BorderRadius = 11
+    Text = ("5")
+  }
+  { Cell6 Label Cells
+    Name = "Cell6"
+    MoveScaled(23,11,10,8)
+    Mouse = Cursor.Pointing
+    Alignment = Align.Center
+    Border = Border.Plain
+    BorderRadius = 11
+    Text = ("6")
+  }
+  { Cell7 Label Cells
+    Name = "Cell7"
+    MoveScaled(1,20,10,8)
+    Mouse = Cursor.Pointing
+    Alignment = Align.Center
+    Border = Border.Plain
+    BorderRadius = 11
+    Text = ("7")
+  }
+  { Cell8 Label Cells
+    Name = "Cell8"
+    MoveScaled(12,20,10,8)
+    Mouse = Cursor.Pointing
+    Alignment = Align.Center
+    Border = Border.Plain
+    BorderRadius = 11
+    Text = ("8")
+  }
+}
